@@ -13,7 +13,7 @@
     # This will be updated to something like RootModule = ...
 
     # Version number of this module.
-    ModuleVersion     = '1.9.0'
+    ModuleVersion     = '2.0.0'
 
     # Supported PSEditions
     CompatiblePSEditions = @('Core')
@@ -107,13 +107,15 @@
             LicenseUri               = 'https://opensource.org/licenses/MIT'
 
             # A URL to the main website for this project.
-            ProjectUri               = 'https://github.com/PeterCullenBurbery/powershell-modules'
+            ProjectUri               = 'https://github.com/PeterCullenBurbery/powershell-functions-007'
 
             # A URL to an icon representing this module.
             # IconUri = ''
 
             # ReleaseNotes of this module
             ReleaseNotes             = @'
+Version 2.0.0: I moved PowershellFunctions007 from https://github.com/PeterCullenBurbery/powershell-modules to https://github.com/PeterCullenBurbery/powershell-functions-007. URL has been updated accordingly.
+
 Version 1.9.0: Added Clean-Path function to normalize and deduplicate the system PATH. This function expands environment variables, removes blank entries, removes case-insensitive duplicates, and broadcasts the updated environment block. Clean-Path complements Add-ToPath and Remove-FromPath by ensuring overall cleanliness of the PATH variable.
 
 Version 1.8.2: Updated GUID. GUID was the same as PowershellFunctions@https://www.powershellgallery.com/packages/PowershellFunctions/.
