@@ -13,7 +13,7 @@
     # This will be updated to something like RootModule = ...
 
     # Version number of this module.
-    ModuleVersion     = '2.2.0'
+    ModuleVersion     = '2.3.0'
 
     # Supported PSEditions
     CompatiblePSEditions = @('Core')
@@ -114,6 +114,8 @@
 
             # ReleaseNotes of this module
             ReleaseNotes             = @'
+Version 2.3.0: Added `Get-PrimaryIPv4Address`, a function that returns the best non-virtual, connected IPv4 address. It prioritizes interfaces like Wi-Fi, Ethernet, or Tailscale while skipping loopbacks and disconnected/virtual interfaces. Useful for cleanly logging or displaying the primary local IP.
+
 Version 2.2.0: Added Zenodo information to including, but not limited to, CITATION.cff, and README.md. Icon URL/URI https://zenodo.org/badge/DOI/10.5281/zenodo.16699957.svg added. Help Info URI/URL 'https://github.com/PeterCullenBurbery/powershell-functions-007#readme' added.
             
 Version 2.1.0: Publishing for Zenodo.
