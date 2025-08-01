@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1.0] - 2025-008-001 016.003.049.190649500 America/New_York 2025-W031-005 2025-213
+
+- publishing for Zenodo.
+
 ## [2.0.0] - 2025-007-025@1.29 PM
 
 - I moved PowershellFunctions007 from https://github.com/PeterCullenBurbery/powershell-modules to https://github.com/PeterCullenBurbery/powershell-functions-007. URL has been updated accordingly.
