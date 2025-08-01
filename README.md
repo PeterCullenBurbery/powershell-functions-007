@@ -55,12 +55,28 @@ Import-Module ./PowershellFunctions007/PowershellFunctions007.psd1
 - **`Get-FileSize`** – Calculates the total size (in bytes) of a file or all files within a directory.
 - **`Get-FileSizeHumanReadable`** – Same as `Get-FileSize` but returns size in a readable string (e.g., "12.345 MB").
 
-## License
+## 📁 Directory Structure
 
-This module is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+The `PowershellFunctions007/` folder contains the `.psd1` manifest and `.psm1` module.
 
-## Release Notes
+## 📄 License
 
-See `PowershellFunctions007.psd1` for full changelog.
+This module is shared under the [MIT License](https://opensource.org/licenses/MIT).
+
+## ⚠️ Disclaimer
+
+This is a development and educational project. All code is provided in good faith and intended for system automation, productivity, and learning purposes.
+
+If you're a rights holder and want attribution changed or material removed, please contact the maintainer.
 
 ---
+
+Maintained with care by Peter Cullen Burbery.
+
+## 📘 Citation
+
+If you use this module in your work, please cite the following:
+
+> Peter Cullen Burbery. (2025). PowerShell Functions 007 (v2.0.0) [Software].
+
+<!-- > Peter Cullen Burbery. (2025). PowerShell Functions 007 (v2.0.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.16649999 -->
