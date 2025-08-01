@@ -1,5 +1,7 @@
 # powershell-functions-007
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16699957.svg)](https://doi.org/10.5281/zenodo.16699957)
+
 PowerShell Functions 007  
 Author: Peter Cullen Burbery  
 PowerShell version: 7.0+ (Core only)  
