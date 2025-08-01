@@ -3,19 +3,28 @@
 PowerShell Functions 007  
 Author: Peter Cullen Burbery  
 PowerShell version: 7.0+ (Core only)  
-Repository: [GitHub](https://github.com/PeterCullenBurbery/powershell-functions-007)
-
+Repository: [GitHub](https://github.com/PeterCullenBurbery/powershell-functions-007)  
+PowerShell Gallery: [PowershellFunctions007](https://www.powershellgallery.com/packages/PowershellFunctions007)
 ## Overview
 
 This module provides a collection of utilities for advanced PowerShell scripting on Windows, including environment configuration, system path management, time/date handling, Windows Explorer behavior tweaks, and more.
 
 The module requires PowerShell 7+ (Core edition) and will throw an exception if imported into older or incompatible environments.
 
-## Install
+## Installation
+
+### From PowerShell Gallery
 
 ```powershell
-# From local development
-Import-Module ./PowershellFunctions007.psd1
+Install-Module -Name PowershellFunctions007 -Scope CurrentUser -Force
+Import-Module PowershellFunctions007
+```
+
+### From Local Clone
+
+```powershell
+# If you've cloned the repository manually
+Import-Module ./PowershellFunctions007/PowershellFunctions007.psd1
 ```
 
 ## Functions
