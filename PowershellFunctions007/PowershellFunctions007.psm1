@@ -825,3 +825,47 @@ public static extern IntPtr SendMessageTimeout(IntPtr hWnd, uint Msg, UIntPtr wP
         Write-Error $_
     }
 }
+
+function Get-PrimaryIPv4Address {
+    <#
+    .SYNOPSIS
+        Returns the most appropriate non-virtual, connected IPv4 address.
+
+    .DESCRIPTION
+        Prefers interfaces like Wi-Fi, Ethernet, or Tailscale, and skips virtual/disconnected interfaces.
+
+    .OUTPUTS
+        [string] - IPv4 address or empty string if none found.
+    #>
+    try {
+        $preferred_keywords = @("Wi-Fi", "Ethernet", "Tailscale")
+        $excluded_keywords = @("VMware", "Virtual", "Bluetooth", "Loopback", "OpenVPN", "Disconnected")
+
+        $interfaces = Get-NetIPAddress -AddressFamily IPv4 -ErrorAction Stop |
+            Where-Object {
+                $_.IPAddress -notlike "169.254.*" -and
+                $_.IPAddress -ne "127.0.0.1" -and
+                $_.PrefixOrigin -ne "WellKnown" -and
+                $_.ValidLifetime -gt 0
+            } |
+            Sort-Object -Property InterfaceMetric
+
+        foreach ($preferred in $preferred_keywords) {
+            $match = $interfaces | Where-Object {
+                $_.InterfaceAlias -like "*$preferred*" -and
+                ($excluded_keywords | Where-Object { $_ -in $_.InterfaceAlias }) -eq $null
+            } | Select-Object -ExpandProperty IPAddress -First 1
+
+            if ($match) { return $match }
+        }
+
+        # Fallback to the first non-excluded interface
+        $match = $interfaces | Where-Object {
+            ($excluded_keywords | Where-Object { $_ -in $_.InterfaceAlias }) -eq $null
+        } | Select-Object -ExpandProperty IPAddress -First 1
+
+        return $match
+    } catch {
+        return ""
+    }
+}
