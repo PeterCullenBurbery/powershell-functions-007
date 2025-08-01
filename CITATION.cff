@@ -1,9 +1,9 @@
 cff-version: 2.5.0
 message: "If you use this module, please cite it using the metadata below."
 title: "Powershell Functions 007"
-version: "2.1.0"
-# doi: 10.5281/zenodo.16649999  # Replace with your actual Zenodo DOI if available
-# url: https://doi.org/10.5281/zenodo.16649999  # Same here
+version: "2.2.0"
+doi: 10.5281/zenodo.16699957
+url: https://doi.org/10.5281/zenodo.16699957
 date-released: 2025-08-01
 authors:
   - family-names: Burbery
