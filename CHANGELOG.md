@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3.0] - 2025-008-001 019.018.025.242875400 America/New_York 2025-W031-005 2025-213
+
+### Added
+
+- Added `Get-PrimaryIPv4Address`, a function that returns the best non-virtual, connected IPv4 address. It prioritizes interfaces like Wi-Fi, Ethernet, or Tailscale while skipping loopbacks and disconnected/virtual interfaces. Useful for cleanly logging or displaying the primary local IP.
+
 ## [2.2.0] - 2025-008-001 016.035.013.346602800 America/New_York 2025-W031-005 2025-213
 
 - Added Zenodo information to including, but not limited to, CITATION.cff, and README.md.
