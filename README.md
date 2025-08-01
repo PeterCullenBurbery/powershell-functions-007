@@ -16,8 +16,7 @@ The module requires PowerShell 7+ (Core edition) and will throw an exception if 
 ### From PowerShell Gallery
 
 ```powershell
-Install-Module -Name PowershellFunctions007 -Scope CurrentUser -Force
-Import-Module PowershellFunctions007
+Install-Module -Name PowershellFunctions007
 ```
 
 ### From Local Clone
