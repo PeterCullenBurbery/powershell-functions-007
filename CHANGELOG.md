@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.0] - 2025-008-002 011.005.018.808795300 America/New_York 2025-W031-006 2025-214
+
+- CITATION.cff no longer includes date-released: (too much of a hassle to update).
+
 ## [2.3.0] - 2025-008-001 019.018.025.242875400 America/New_York 2025-W031-005 2025-213
 
 ### Added
