@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4.1] - 2025_008_007_015_029_000_394817000_America_slash_New_York_2025_W032_004_2025_219_1754594940.394817000
+
+- version field removed from CITATION.cff. It was too much hassle [to keep up to date].
+
 ## [2.4.0] - 2025-008-002 011.005.018.808795300 America/New_York 2025-W031-006 2025-214
 
 - CITATION.cff no longer includes date-released: 2025-08-01 (too much of a maintenance hassle to update).
