@@ -869,3 +869,43 @@ function Get-PrimaryIPv4Address {
         return ""
     }
 }
+
+function Get-UnderscoreTimestamp {
+    [CmdletBinding()]
+    param(
+        [datetime]$Date = (Get-Date)
+    )
+
+    # Year and ordinal date (day of year, zero-padded to 3)
+    $year = $Date.Year
+    $ordinal = '{0:D3}' -f $Date.DayOfYear
+
+    # Time components (zero-padded to 3)
+    $hour   = '{0:000}' -f $Date.Hour
+    $minute = '{0:000}' -f $Date.Minute
+    $second = '{0:000}' -f $Date.Second
+
+    # Nanoseconds from ticks (ticks are 100ns)
+    $ticksWithinSecond = $Date.Ticks % 10000000
+    $nanoseconds = '{0:000000000}' -f ($ticksWithinSecond * 100)
+
+    # IANA timezone with _slash_ replacement
+    $iana = Get-IanaTimeZone
+    $tz_formatted = $iana -replace '/', '_slash_'
+
+    # ISO year-week-weekday
+    $iso = Get-IsoWeekDate -date $Date
+    if ($iso -notmatch '^(?<y>\d{4})-W(?<w>\d{3})-(?<d>\d{3})$') {
+        throw "Unexpected ISO week format: $iso"
+    }
+    $iso_year = $Matches['y']
+    $iso_week = $Matches['w']
+    $iso_dow  = $Matches['d']
+
+    # Unix seconds
+    $unixSeconds = [DateTimeOffset]$Date
+    $unixSeconds = $unixSeconds.ToUnixTimeSeconds()
+
+    # Assemble final string
+    return "$year`_${ordinal}`_${ordinal}`_${hour}`_${minute}`_${second}`_${nanoseconds}`_${tz_formatted}`_${iso_year}_W${iso_week}_$iso_dow`_${year}_$ordinal`_${unixSeconds}_$nanoseconds"
+}
