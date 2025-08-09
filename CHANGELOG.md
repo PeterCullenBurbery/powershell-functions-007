@@ -16,6 +16,10 @@ All notable changes to this project will be documented in this file.
   - Repeated ordinal date and nanoseconds for redundancy
 - Useful for precise logging, sortable filenames, and machine-readable timestamps with embedded timezone and ISO calendar context.
 
+### Removed
+
+- Removed version number from README.md. It was too much hassle.
+
 ## [2.4.1] - 2025_008_007_015_029_000_394817000_America_slash_New_York_2025_W032_004_2025_219_1754594940.394817000
 
 - version field removed from CITATION.cff. It was too much hassle [to keep up to date].
