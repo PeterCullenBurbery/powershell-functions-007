@@ -80,6 +80,6 @@ Maintained with care by Peter Cullen Burbery.
 
 If you use this module in your work, please cite the following:
 
-> Peter Cullen Burbery. (2025). PowerShell Functions 007 (v2.4.0) [Software]. Zenodo. https://doi.org/10.5281/zenodo.16699957
+> Peter Cullen Burbery. (2025). PowerShell Functions 007 [Software]. Zenodo. https://doi.org/10.5281/zenodo.16699957
 
 I plan to configure Powershell actions to publish in the future to make publishing easier.
