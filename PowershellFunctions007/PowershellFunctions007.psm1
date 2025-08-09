@@ -871,6 +871,46 @@ function Get-PrimaryIPv4Address {
 }
 
 function Get-UnderscoreTimestamp {
+<#
+.SYNOPSIS
+Generates an underscore-delimited, timezone-aware, nanosecond-precision timestamp string.
+
+.DESCRIPTION
+`Get-UnderscoreTimestamp` produces a precise timestamp string with the following components:
+- Year (YYYY)
+- Ordinal date (DDD) — repeated in the first and later sections
+- Hour of day (HHH, zero-padded to 3 digits)
+- Minute (MMM, zero-padded to 3 digits)
+- Second (SSS, zero-padded to 3 digits)
+- Nanoseconds (NNNNNNNNN, zero-padded to 9 digits)
+- IANA timezone identifier (slashes replaced with `_slash_`)
+- ISO year
+- ISO week number (Wnnn)
+- ISO day of week (001–007, Monday = 001)
+- Calendar year (YYYY)
+- Day of year (DDD)
+- Unix epoch seconds
+- Nanoseconds (again, zero-padded to 9 digits)
+
+The output is suitable for precise, sortable, machine-readable timestamps with embedded timezone and ISO calendar context.
+
+.PARAMETER Date
+The date/time to format. Defaults to the current system date/time.
+
+.EXAMPLE
+PS> Get-UnderscoreTimestamp
+2025_008_008_021_034_041_360527700_America_slash_New_York_2025_W032_005_2025_220_1754703281_360527700
+
+.EXAMPLE
+PS> Get-UnderscoreTimestamp -Date (Get-Date "2025-08-08T14:23:45.1234567Z")
+2025_221_221_014_023_045_123456700_Coordinated_slash_Universal_2025_W032_005_2025_221_1754663025_123456700
+
+.NOTES
+- Relies on `Get-IanaTimeZone` for timezone conversion.
+- Relies on `Get-IsoWeekDate` for ISO year/week/day calculations.
+- Day-of-year (ordinal) is computed directly from `$Date.DayOfYear`.
+- Nanoseconds are computed from .NET ticks (`Ticks % 10000000 * 100`).
+#>
     [CmdletBinding()]
     param(
         [datetime]$Date = (Get-Date)
