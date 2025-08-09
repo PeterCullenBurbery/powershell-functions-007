@@ -1,3 +1,7 @@
 add function
 
 update CHANGELOG.md.
+
+update function
+
+now update CHANGELOG.md.
