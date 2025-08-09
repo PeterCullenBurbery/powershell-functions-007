@@ -114,6 +114,8 @@
 
             # ReleaseNotes of this module
             ReleaseNotes             = @'
+I am no longer maintaining release notes. For the most up to date release notes, see CHANGELOG.md.
+
 Version 2.4.0: CITATION.cff no longer includes date-released: 2025-08-01 (too much of a maintenance hassle to update).
 
 Version 2.3.0: Added `Get-PrimaryIPv4Address`, a function that returns the best non-virtual, connected IPv4 address. It prioritizes interfaces like Wi-Fi, Ethernet, or Tailscale while skipping loopbacks and disconnected/virtual interfaces. Useful for cleanly logging or displaying the primary local IP.
