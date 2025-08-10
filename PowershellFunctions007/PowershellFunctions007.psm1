@@ -959,3 +959,57 @@ PS> Get-UnderscoreTimestamp -Date (Get-Date "2025-08-08T14:23:45.1234567Z")
     # Final string
     return "$year`_${month}`_${day}`_${hour}`_${minute}`_${second}`_${nanoseconds}`_${tz_formatted}`_${iso_year}_W${iso_week}_$iso_dow`_${year}_$doy`_${unixSeconds}_$nanoseconds"
 }
+
+function Get-PrimaryIPv4AddressUnderscore {
+    <#
+    .SYNOPSIS
+        Returns the most appropriate non-virtual, connected IPv4 address
+        formatted with underscores and zero-padded octets (e.g., 192_168_004_042).
+
+    .DESCRIPTION
+        Prefers interfaces like Wi-Fi, Ethernet, or Tailscale, and skips virtual/disconnected interfaces.
+        Pads each octet to 3 digits and replaces dots with underscores.
+
+    .OUTPUTS
+        [string] - IPv4 address in underscore/zero-padded form or empty string if none found.
+    #>
+    try {
+        $preferred_keywords = @("Wi-Fi", "Ethernet", "Tailscale")
+        $excluded_keywords = @("VMware", "Virtual", "Bluetooth", "Loopback", "OpenVPN", "Disconnected")
+
+        $interfaces = Get-NetIPAddress -AddressFamily IPv4 -ErrorAction Stop |
+            Where-Object {
+                $_.IPAddress -notlike "169.254.*" -and
+                $_.IPAddress -ne "127.0.0.1" -and
+                $_.PrefixOrigin -ne "WellKnown" -and
+                $_.ValidLifetime -gt 0
+            } |
+            Sort-Object -Property InterfaceMetric
+
+        $selected_ip = $null
+
+        foreach ($preferred in $preferred_keywords) {
+            $match = $interfaces | Where-Object {
+                $_.InterfaceAlias -like "*$preferred*" -and
+                ($excluded_keywords | Where-Object { $_ -in $_.InterfaceAlias }) -eq $null
+            } | Select-Object -ExpandProperty IPAddress -First 1
+
+            if ($match) { $selected_ip = $match; break }
+        }
+
+        if (-not $selected_ip) {
+            $selected_ip = $interfaces | Where-Object {
+                ($excluded_keywords | Where-Object { $_ -in $_.InterfaceAlias }) -eq $null
+            } | Select-Object -ExpandProperty IPAddress -First 1
+        }
+
+        if (-not $selected_ip) { return "" }
+
+        # Zero-pad and underscore-separate octets
+        $formatted_ip = ($selected_ip -split '\.') | ForEach-Object { "{0:D3}" -f [int]$_ }
+        return ($formatted_ip -join '_')
+
+    } catch {
+        return ""
+    }
+}
