@@ -5,3 +5,5 @@ update CHANGELOG.md.
 update function
 
 now update CHANGELOG.md.
+
+update PowershellFunctions007.psd1
