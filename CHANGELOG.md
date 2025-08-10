@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
+# Changelog
+
+## [2.5.1] - 2025_008_009_021_020_022_943533600_America_slash_New_York_2025_W032_006_2025_221_1754788822_943533600
+### Fixed
+- **Get-UnderscoreTimestamp**  
+  - Fixed output format from:
+    ```
+    YYYY_DDD_DDD_HHH_MMM_SSS_NNNNNNNNN_TimeZone_ISOYEAR_WWWW_WEEKDAY_YYYY_DOY_UnixSeconds_Nanoseconds
+    ```
+    to:
+    ```
+    YYYY_MMM_DDD_HHH_MMM_SSS_NNNNNNNNN_TimeZone_ISOYEAR_WWWW_WEEKDAY_YYYY_DOY_UnixSeconds_Nanoseconds
+    ```
+    where:
+    - `MMM` (month) and `DDD` (day of month) are now zero-padded to **three digits** by prefixing a literal `0` (e.g., `January` → `001`, `August` → `008`).
+    - Dropped the repeated ordinal date in the first section.
+  - Adjusted function documentation to reflect new field definitions.
+
 ## [2.5.0] - 2025_008_009_019_033_011_984801800_America_slash_New_York_2025_W032_006_2025_221_1754782391_984801800
 
 ### Added
