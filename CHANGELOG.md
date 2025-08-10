@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 # Changelog
 
+## [2.6.1] - 2025_008_009_022_010_034_511363800_America_slash_New_York_2025_W032_006_2025_221_1754791834_511363800
+
+### Added
+- **`Get-PrimaryIPv4AddressUnderscore`** function  
+  - Returns the most appropriate non-virtual, connected IPv4 address formatted in underscore-delimited, zero-padded form.  
+  - Pads each octet to three digits (e.g., `192.168.4.42` → `192_168_004_042`).  
+  - Prefers Wi-Fi, Ethernet, or Tailscale interfaces, while skipping virtual or disconnected adapters.
+  - Maintains fallback to first available non-excluded interface if no preferred match is found.
+
+## Explanation
+
+- 2.6.0 couldn't be released because it was already taken. I started working on 2.6.0 to introduce Get-PrimaryIPv4AddressUnderscore and then realized I needed to fix an issue with Get-UnderscoreTimestamp so I worked on and released 2.5.1. I to get across Get-PrimaryIPv4AddressUnderscore publishing 2.6.1
+
+### Notes
+- The new IP formatting aligns with underscore timestamp conventions for filenames and logs.
+- Intended for integration into transcript logging and file naming workflows.
+
 ## [2.6.0] - 2025_008_009_021_052_019_208877600_America_slash_New_York_2025_W032_006_2025_221_1754790739_208877600
 
 ### Added
