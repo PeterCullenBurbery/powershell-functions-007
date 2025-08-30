@@ -1013,3 +1013,83 @@ function Get-PrimaryIPv4AddressUnderscore {
         return ""
     }
 }
+
+function Enable-SecondsInTaskbar {
+<#
+.SYNOPSIS
+Enables seconds display on the Windows taskbar clock.
+
+.DESCRIPTION
+Sets HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\ShowSecondsInSystemClock to 1.
+Optionally restarts Explorer so the change takes effect immediately.
+
+.PARAMETER NoRestart
+Write the registry value but do not restart Explorer.
+
+.PARAMETER Disable
+Set the value to 0 (i.e., turn seconds off) instead of enabling it.
+
+.EXAMPLE
+Enable-SecondsInTaskbar
+Enables seconds and restarts Explorer.
+
+.EXAMPLE
+Enable-SecondsInTaskbar -NoRestart
+Enables seconds but does not restart Explorer.
+
+.EXAMPLE
+Enable-SecondsInTaskbar -Disable
+Disables seconds and restarts Explorer.
+#>
+    [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Low')]
+    param(
+        [switch]$NoRestart,
+        [switch]$Disable
+    )
+
+    $regPath = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+    $name    = 'ShowSecondsInSystemClock'
+    $value   = if ($Disable) { 0 } else { 1 }
+
+    try {
+        # Ensure key exists
+        if (-not (Test-Path $regPath)) {
+            if ($PSCmdlet.ShouldProcess($regPath, 'Create registry key')) {
+                New-Item -Path $regPath -Force | Out-Null
+            }
+        }
+
+        $current = (Get-ItemProperty -Path $regPath -Name $name -ErrorAction SilentlyContinue).$name
+
+        if ($current -ne $value) {
+            if ($PSCmdlet.ShouldProcess("$regPath\$name", "Set to $value")) {
+                New-ItemProperty -Path $regPath -Name $name -PropertyType DWord -Value $value -Force | Out-Null
+            }
+        } else {
+            Write-Verbose "Value already set to $value."
+        }
+
+        if (-not $NoRestart) {
+            if ($PSCmdlet.ShouldProcess('Explorer', 'Restart to apply setting')) {
+                # Gracefully restart Explorer
+                $explorer = Get-Process explorer -ErrorAction SilentlyContinue
+                if ($explorer) {
+                    Stop-Process -Id $explorer.Id -Force -ErrorAction SilentlyContinue
+                    Start-Sleep -Milliseconds 500
+                }
+                Start-Process explorer.exe
+            }
+        } else {
+            Write-Verbose "Skipping Explorer restart due to -NoRestart."
+        }
+
+        if ($Disable) {
+            Write-Host "Taskbar seconds have been DISABLED. $(if($NoRestart){'Restart Explorer or sign out/in to see the change.'})"
+        } else {
+            Write-Host "Taskbar seconds have been ENABLED. $(if($NoRestart){'Restart Explorer or sign out/in to see the change.'})"
+        }
+    }
+    catch {
+        Write-Error "Failed to update taskbar seconds: $($_.Exception.Message)"
+    }
+}
