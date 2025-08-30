@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 # Changelog
 
+## [2.7.0] - 2025_008_030_011_051_036_893937300_America_slash_New_York_2025_W035_006_2025_242_1756569096_893937300
+
+- Added Enable-SecondsInTaskbar.
+
 ## [2.6.1] - 2025_008_009_022_010_034_511363800_America_slash_New_York_2025_W032_006_2025_221_1754791834_511363800
 
 ### Added
